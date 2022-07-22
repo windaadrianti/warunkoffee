@@ -1,0 +1,77 @@
+<div class="col-sm-12">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3>Data Pegawai</h3>
+    </div>
+    <?php 
+    if ($this->session->flashdata('success') || $this->session->flashdata('warning')) {
+      if ($this->session->flashdata('success')){
+        ?>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times; 
+          </button>
+          <i class="fa fa-check sign">
+            <?php 
+              echo $this->session->flashdata('success');
+            ?>
+          </i>
+        </div>
+      <?php }
+      else if($this->session->flashdata('warning')){
+        ?>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+          </button>
+          <i class="fa fa-check sign">
+            <?php 
+              echo $this->session->flashdata('warning');
+            ?>
+          </i>
+        </div>
+        <?php
+      }
+    } 
+    ?>
+    <table class="table table-striped">
+      <tr>
+        <th>NO</th>
+        <th>NIP</th>
+        <th>NAMA</th>
+        <th>JABATAN</th>
+        <th>JENIS KELAMIN</th>
+        <th>AGAMA</th>
+        <th>TELEPON</th>
+        <th>ALAMAT</th>
+        <th colspan="2">
+          <a href="<?php echo base_url();?>index.php/D111911011_Pegawai/open_form" class="btn btn-success">Tambah data</a>
+        </th>
+      </tr>
+      <?php 
+        $no = 1;
+        foreach ($list_pegawai->result() as $rowPegawai) {
+          ?>
+          <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $rowPegawai->nip; ?></td>
+            <td><?php echo $rowPegawai->nama; ?></td>
+            <td><?php echo $rowPegawai->nama_jabatan; ?></td>
+            <td><?php echo $rowPegawai->jenis_kelamin; ?></td>
+            <td><?php echo $rowPegawai->agama; ?></td>
+            <td><?php echo $rowPegawai->telepon; ?></td>
+            <td><?php echo $rowPegawai->alamat; ?></td>
+            <td>
+              <a href="<?php echo base_url();?>index.php/D111911011_Pegawai/open_form/<?php echo $rowPegawai->id_pegawai; ?>" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+              <a href="<?php echo base_url();?>index.php/D111911011_Pegawai/delete/<?php echo $rowPegawai->id_pegawai; ?>" class="btn btn-danger">Hapus</a>
+            </td>
+          </tr>
+          <?php 
+          $no++;
+        }
+       ?>
+    </table>
+  </div>
+</div>
